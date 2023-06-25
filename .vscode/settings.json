@@ -1,0 +1,12 @@
+{
+    "[python]": {
+           "editor.semanticHighlighting.enabled": false
+    },
+    "python.linting.lintOnSave": true,
+    "python.linting.pylintEnabled": true,
+    "python.linting.enabled": true,
+    "diffEditor.ignoreTrimWhitespace": false,
+    "editor.renderWhitespace": "boundary",
+    "editor.suggestSelection": "first",
+    "python.analysis.typeCheckingMode": "off"
+}

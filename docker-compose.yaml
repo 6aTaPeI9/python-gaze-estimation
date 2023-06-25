@@ -1,0 +1,15 @@
+version: '3'
+
+services:
+  gaze_tracking:
+    build:
+      context: .
+    hostname: $COMPUTERNAME.$USERDNSDOMAIN
+    ports:
+      - "8486:8486"
+    extra_hosts:
+      - "localhost:host-gateway"
+      - "$COMPUTERNAME.$USERDNSDOMAIN:host-gateway"
+    shm_size: '4gb'
+    volumes:
+      - .:/home/python-gaze-estimation

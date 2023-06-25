@@ -1,0 +1,6 @@
+
+cmake
+mediapipe
+fastapi
+uvicorn
+jsonrpcserver
