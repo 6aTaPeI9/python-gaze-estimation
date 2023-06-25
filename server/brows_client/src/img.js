@@ -115,7 +115,7 @@
   
         const data = canvas.toDataURL("image/jpg");
         var data_b64 = data.replace(/^data:image\/?[A-z]*;base64,/)
-        fetch('http://127.0.0.1:8486/process', {
+        fetch('https://b8ca-85-113-213-55.ngrok-free.app/process/', {
             method: 'POST',
             headers: {
                 'Accept': 'application/json',
@@ -127,7 +127,7 @@
         .then((response) => {
           var parsed = JSON.parse(response)
           var image = decodeURIComponent(escape(parsed['frame']))
-
+          console.log(image)
           photo.setAttribute("src", "data:image/jpg;base64," + image);
         })
 

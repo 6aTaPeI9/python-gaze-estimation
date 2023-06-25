@@ -2,6 +2,7 @@ import mediapipe as mp
 import cv2
 import numpy as np
 import pickle
+from itertools import chain
 
 
 def get_facemesh_coords(landmark_list, img):
@@ -470,11 +471,11 @@ class Gazetimation:
             return (left_pupil, right_pupil),\
                 (gaze_left_eye, gaze_right_eye),\
                 {
-                    'pwc1': pickle.dumps(pupil_world_cord[0]).decode('latin-1'),
-                    'pwc2': pickle.dumps(pupil_world_cord[1]).decode('latin-1'),
-                    'gaze1': pickle.dumps(gaze_point_3D[0]).decode('latin-1'),
-                    'gaze2': pickle.dumps(gaze_point_3D[1]).decode('latin-1'),
-                    'face': pickle.dumps(get_facemesh_coords(points, frame)).decode('latin-1')
+                    'pwc1': list(chain(*pupil_world_cord[0].tolist())),
+                    'pwc2': list(chain(*pupil_world_cord[1].tolist())),
+                    'gaze1': list(chain(*gaze_point_3D[0].tolist())),
+                    'gaze2': list(chain(*gaze_point_3D[1].tolist())),
+                    # 'face': pickle.dumps(get_facemesh_coords(points, frame)).decode('latin-1')
                 }
 
     def smoothing(

@@ -5,8 +5,9 @@
     "python.linting.lintOnSave": true,
     "python.linting.pylintEnabled": true,
     "python.linting.enabled": true,
+    "python.languageServer": "Pylance",
     "diffEditor.ignoreTrimWhitespace": false,
     "editor.renderWhitespace": "boundary",
     "editor.suggestSelection": "first",
-    "python.analysis.typeCheckingMode": "off"
+    "python.analysis.typeCheckingMode": "off",
 }
