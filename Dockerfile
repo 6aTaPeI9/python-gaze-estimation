@@ -23,8 +23,13 @@ RUN yum -y install libfontconfig.so.1
 
 RUN pip3.8 install --upgrade pip
 RUN pip3.8 install cmake
+RUN pip3.8 install mediapipe
+RUN pip3.8 install fastapi
+RUN pip3.8 install uvicorn
+RUN pip3.8 install jsonrpcserver
+RUN pip3.8 install websockets
 RUN yum -y install cmake
 COPY . /home/gaze_tracking
 WORKDIR /home/gaze_tracking
-RUN pip3.8 install -r ./requirements.txt
+# RUN pip3.8 install -r ./requirements.txt
 ENTRYPOINT ["/bin/sh","-c","sleep infinity"]

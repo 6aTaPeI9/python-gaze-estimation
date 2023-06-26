@@ -10,7 +10,6 @@ from fastapi import FastAPI, WebSocket
 from fastapi.staticfiles import StaticFiles
 from fastapi.middleware.cors import CORSMiddleware
 
-
 class ImgProcess(BaseModel):
     img: str
 
@@ -73,7 +72,12 @@ async def wsock(websocket: WebSocket):
     await websocket.accept()
     while True:
         res = await websocket.receive_text()
-        res = gaze_track.calc_gaze(res)
+        try:
+            print('На вход: ', res)
+            res = res.replace('undefined', '')
+            res = gaze_track.calc_gaze(res) or '{}'
+        except Exception:
+            res = '{}'
         res = await websocket.send_text(res)
 
 
