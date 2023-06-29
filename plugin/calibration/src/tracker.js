@@ -6,20 +6,40 @@ let canvas = document.querySelector("#canvas")
 let video = document.querySelector("#video");
 var width = 620
 
-navigator.mediaDevices
-    .getUserMedia({ video: true, audio: false })
-    .then((stream) => {
-        video.srcObject = stream;
 
+function run_status_check(){
+    setInterval(() => {
+        fetch('http://localhost:8484/status/', {
+        method: 'POST',
+        headers: {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json'
+        },
+        body: '{}'
     })
-    .catch((err) => {
-        console.error(`An error occurred: ${err}`);
-    });
+    .then(response => response.json())
+    .then((response) => {
+        console.log(response)
+        var parsed = response
+        var title = document.querySelector(".calib_title");
+        var status = parsed['status']
 
+        if (status == 'do_not_watch'){
+            title.textContent = 'Do not watch';
+            title.style.color = 'brown';
+        }
+
+        if (['watch_left', 'watch_right'].includes(status)){
+            title.textContent = 'Watching';
+            title.style.color = 'greenyellow';
+        }
+    })
+    }, 1000);
+}
 
 function process_img(){
     console.log('Start proces')
-    var socket = new WebSocket("ws://localhost:8485");
+    var socket = new WebSocket("ws://192.168.1.111:8486");
     var send_cnt = 0
     var ended = false
 
@@ -46,6 +66,8 @@ function process_img(){
                 },
                 body: JSON.stringify({"frame_data": RESULT_CALIB})
             })
+            video.srcObject.getTracks()[0].stop()
+            run_status_check()
         }
     }
 

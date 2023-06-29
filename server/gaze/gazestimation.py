@@ -427,7 +427,7 @@ class Gazetimation:
                 self.camera_matrix,
                 dist_coeffs,
             )
-            print(gaze_direction_left_eye)
+
             gaze_direction_right_eye, _ = cv2.projectPoints(
                 (
                     int(gaze_point_3D[1][0]),
@@ -475,7 +475,6 @@ class Gazetimation:
                     'pwc2': list(chain(*pupil_world_cord[1].tolist())),
                     'gaze1': list(chain(*gaze_point_3D[0].tolist())),
                     'gaze2': list(chain(*gaze_point_3D[1].tolist())),
-                    # 'face': pickle.dumps(get_facemesh_coords(points, frame)).decode('latin-1')
                 }
 
     def smoothing(

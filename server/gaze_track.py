@@ -11,7 +11,7 @@ import numpy as np
 from gaze import gazestimation
 
 
-def calc_gaze(frame_data: str, w_frame=False):
+def calc_gaze(frame_data: str, w_frame=True):
     """
         Вычисление направления взгляда
     """
@@ -29,11 +29,10 @@ def calc_gaze(frame_data: str, w_frame=False):
 
         _, image = cv2.imencode('.jpg', image)
         fr_res = base64.b64encode(image)
-        print('coords', coords)
 
         data = {}
         if w_frame:
-            data['frame']: fr_res.decode()
+            data['frame'] = fr_res.decode()
 
         data.update(coords)
 

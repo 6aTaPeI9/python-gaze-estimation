@@ -4,6 +4,7 @@
 import uvicorn
 import gaze_track
 import json
+import traceback
 
 from pydantic import BaseModel
 
@@ -74,17 +75,16 @@ async def wsock(websocket: WebSocket):
     while True:
         res = await websocket.receive_text()
         try:
-            print('На вход: ', res)
             res = json.loads(res)
             frame = res.get('frame')
             frame = frame.replace('undefined', '')
-            result = gaze_track.calc_gaze(frame) or {}
+            result = gaze_track.calc_gaze(frame, True) or {}
             result.update(res.get('custom') or {})
-        except Exception as ex:
-            print(ex)
+        except Exception:
+            print(traceback.format_exc())
             result = {}
-        result = await websocket.send_text(json.dumps(result))
+        await websocket.send_text(json.dumps(result))
 
 
 if __name__ == '__main__':
-    uvicorn.run("router:app", port=8485, log_level="info")
+    uvicorn.run("router:app", port=8486, log_level="info")

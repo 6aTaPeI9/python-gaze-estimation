@@ -15,7 +15,6 @@ def monitor_calibrate(calib_map: dict):
     """
         Калибровка углов монитора
     """
-    print('Калибровка по: ')
     left_eye_avg = []
     right_eye_avg = []
 
@@ -39,10 +38,10 @@ def monitor_calibrate(calib_map: dict):
         right_eye_avg.append(cur_avg)
 
     max_z = max([i[2] for i in left_eye_avg])
-    left_x = min([left_eye_avg[0][0], left_eye_avg[3][0]]) - 10
-    top_y = min([left_eye_avg[0][1], left_eye_avg[1][1]]) - 10
-    right_x = max([left_eye_avg[1][0], left_eye_avg[2][0]]) + 10
-    bottom_y = max([left_eye_avg[3][1], left_eye_avg[2][1]]) + 10
+    left_x = min([left_eye_avg[0][0], left_eye_avg[3][0]]) - 5
+    top_y = min([left_eye_avg[0][1], left_eye_avg[1][1]]) - 5
+    right_x = max([left_eye_avg[1][0], left_eye_avg[2][0]]) + 5
+    bottom_y = max([left_eye_avg[3][1], left_eye_avg[2][1]]) + 5
     top_l = (left_x, top_y, max_z)
     top_r = (right_x, top_y, max_z)
     bot_r = (right_x, bottom_y, max_z)
@@ -50,10 +49,10 @@ def monitor_calibrate(calib_map: dict):
     left_eye_avg = [top_l, top_r, bot_r, bot_l]
 
     max_z = max([i[2] for i in right_eye_avg])
-    left_x = min([right_eye_avg[0][0], right_eye_avg[3][0]]) - 10
-    top_y = min([right_eye_avg[0][1], right_eye_avg[1][1]]) - 10
-    right_x = max([right_eye_avg[1][0], right_eye_avg[2][0]]) + 10
-    bottom_y = max([right_eye_avg[3][1], right_eye_avg[2][1]]) + 10
+    left_x = min([right_eye_avg[0][0], right_eye_avg[3][0]]) - 5
+    top_y = min([right_eye_avg[0][1], right_eye_avg[1][1]]) - 5
+    right_x = max([right_eye_avg[1][0], right_eye_avg[2][0]]) + 5
+    bottom_y = max([right_eye_avg[3][1], right_eye_avg[2][1]]) + 5
     top_l = (left_x, top_y, max_z)
     top_r = (right_x, top_y, max_z)
     bot_r = (right_x, bottom_y, max_z)

@@ -46,4 +46,31 @@ function draw_circle() {
     }
   };
 
-main_box.onclick = draw_circle
+fetch('http://localhost:8484/status/', {
+  method: 'POST',
+  headers: {
+      'Accept': 'application/json',
+      'Content-Type': 'application/json'
+  },
+  body: '{}'
+  })
+  .then(response => response.json())
+  .then((response) => {
+      console.log(response)
+      if (response['track_runned']){
+        main_box.style.visibility = 'hidden'
+        document.getElementById("process").style.visibility = null;
+        run_status_check()
+      }
+      else{
+          navigator.mediaDevices
+          .getUserMedia({ video: true, audio: false })
+          .then((stream) => {
+              video.srcObject = stream;
+          })
+          .catch((err) => {
+              console.error(`An error occurred: ${err}`);
+          });
+          main_box.onclick = draw_circle
+      }
+  })
