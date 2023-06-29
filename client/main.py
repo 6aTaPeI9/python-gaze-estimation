@@ -9,10 +9,10 @@ import json
 import traceback
 import keyboard
 
-# plt.ion()
-# fig = plt.figure()
-# ax = fig.add_subplot(projection='3d')
-# fig.show()
+plt.ion()
+fig = plt.figure()
+ax = fig.add_subplot(projection='3d')
+fig.show()
 PRESSED = False
 APRESSED = False
 POINTS_LIST = []

@@ -18,7 +18,7 @@ def get_image():
 
 def process_img(websocket):
     """
-        Обработка изображения
+        Обработка изображения1355
     """
     img = get_image()
     websocket.send(img)

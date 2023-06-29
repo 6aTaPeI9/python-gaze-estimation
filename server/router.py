@@ -3,6 +3,7 @@
 """
 import uvicorn
 import gaze_track
+import json
 
 from pydantic import BaseModel
 
@@ -48,8 +49,8 @@ def process_img(data: ImgProcess):
             gaze2: int array - вектор для правого зрачка
     """
     data = data.img.replace('undefined', '')
-    res = gaze_track.calc_gaze(data)
-    return res
+    res = gaze_track.calc_gaze(data, w_frame=True)
+    return json.dumps(res)
 
 # @app.exception_handler(404)
 # def handle_not_found(_,__):
@@ -74,11 +75,15 @@ async def wsock(websocket: WebSocket):
         res = await websocket.receive_text()
         try:
             print('На вход: ', res)
-            res = res.replace('undefined', '')
-            res = gaze_track.calc_gaze(res) or '{}'
-        except Exception:
-            res = '{}'
-        res = await websocket.send_text(res)
+            res = json.loads(res)
+            frame = res.get('frame')
+            frame = frame.replace('undefined', '')
+            result = gaze_track.calc_gaze(frame) or {}
+            result.update(res.get('custom') or {})
+        except Exception as ex:
+            print(ex)
+            result = {}
+        result = await websocket.send_text(json.dumps(result))
 
 
 if __name__ == '__main__':

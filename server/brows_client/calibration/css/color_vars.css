@@ -1,0 +1,13 @@
+:root{
+    --content-border: #4d535e;
+    --default-text: #e0e2e4;
+    --default-title: #b2b4b8;
+    --dark-text: #8e9297;
+    --hard-dark-background: #2f3136;
+    --soft-dark-background: #383D44;
+    --settings-size: 3vh;
+    --small-settings-size: 2vh;
+    --small-text-size: 2vh;
+    --button-color-on-light: #5e5e5e;
+    --soft-red: #480607;
+}
